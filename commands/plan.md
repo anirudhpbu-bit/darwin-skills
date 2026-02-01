@@ -1,6 +1,6 @@
 ---
-description: Generate structured implementation plans
-darwin_version: 1.0.0
+description: Generate structured implementation plans. Use when user asks to plan a feature, design an approach, architect a solution, create a roadmap, or needs step-by-step implementation strategy before coding.
+darwin_version: 1.1.0
 darwin_modules:
   input: v1
   research: v2

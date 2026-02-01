@@ -1,6 +1,6 @@
 ---
-description: Find code smells, duplicates, and TODOs
-darwin_version: 1.0.2
+description: Find code smells, duplicates, and TODOs. Use when user asks about technical debt, code quality, cleanup opportunities, wants to find issues, audit the codebase, or asks "what needs fixing" or "what's wrong with this code".
+darwin_version: 1.1.0
 darwin_modules:
   input: v2
   research: v1

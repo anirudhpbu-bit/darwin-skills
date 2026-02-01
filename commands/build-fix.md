@@ -1,5 +1,13 @@
 ---
-description: Loop - run build, fix errors, repeat until clean
+description: Loop - run build, fix errors, repeat until clean. Use when user asks to fix build errors, resolve type errors, make the build pass, fix compilation issues, or says "build is broken" or "fix the errors".
+darwin_version: 1.1.0
+darwin_modules:
+  input: v2
+  research: v3
+  structure: v1
+  output: v1
+  workflow: v2
+  validation: v1
 ---
 
 # Build Fix Loop
@@ -16,26 +24,10 @@ Based on project:
 
 ### 2. Run Build Loop
 
-```
-ITERATION 1
-═══════════════════════════════════════════════════
-Running: npx tsc --noEmit
-
-[Output]
-
-Found X errors
-
-Fixing:
-  1. file.tsx:42 - TS2339: Property 'foo' does not exist
-     Fix: [description of fix]
-
-  2. file.tsx:55 - TS2345: Argument of type...
-     Fix: [description of fix]
-
-═══════════════════════════════════════════════════
-ITERATION 2
-...
-```
+- Maximum 10 iterations (prevent infinite loops)
+- If same error persists 3 times, stop and ask for help
+- After each fix, run build again to verify
+- Don't make changes that could break runtime behavior
 
 ### 3. Error Categories
 
@@ -47,82 +39,51 @@ ITERATION 2
 | Unused variable | Remove or prefix with _ |
 | Missing return | Add return statement |
 
-### 4. Loop Rules
-
-- Maximum 10 iterations (prevent infinite loops)
-- If same error persists 3 times, stop and ask for help
-- After each fix, run build again to verify
-- Don't make changes that could break runtime behavior
-
----
-
-## Output Format
-
-```
-═══════════════════════════════════════════════════
-BUILD FIX LOOP
-═══════════════════════════════════════════════════
-
-Starting build check...
-
-ITERATION 1
-───────────────────
-Errors found: 5
-
-[Fix 1] src/components/Button.tsx:23
-  Error: TS2339 - Property 'onPress' does not exist on type
-  Fix: Added 'onPress' to ButtonProps interface
-
-[Fix 2] src/screens/HomeScreen.tsx:45
-  Error: TS2345 - Argument type mismatch
-  Fix: Updated function parameter type
-
-Building again...
-
-ITERATION 2
-───────────────────
-Errors found: 1
-
-[Fix 3] src/store/useAppStore.ts:12
-  Error: TS2322 - Type 'string' is not assignable to 'number'
-  Fix: Changed type annotation
-
-Building again...
-
-═══════════════════════════════════════════════════
-BUILD SUCCESSFUL
-═══════════════════════════════════════════════════
-
-Fixed 3 errors in 2 iterations.
-
-Changes made:
-- src/components/Button.tsx (1 fix)
-- src/screens/HomeScreen.tsx (1 fix)
-- src/store/useAppStore.ts (1 fix)
-```
-
----
-
 ## Safety
 
 - Only fix TypeScript errors, not warnings
 - Preserve existing behavior
 - If uncertain about a fix, ask first
-- Show diff before applying risky changes
 
----
 
-## Commands
+## Input
 
-```bash
-# Type check only (faster)
-npx tsc --noEmit
+**Scope:** $ARGUMENTS
 
-# Full build
-npm run build
+If no arguments provided, analyze the current project directory.
 
-# With watch (for development)
-npx tsc --noEmit --watch
+
+## Context
+
+Proceed directly with the task. Only search if explicitly needed.
+
+
+## Output Format
+
+Use ASCII dividers for sections:
+```
+═══════════════════════════════════════════════════
+TITLE: [Name]
+═══════════════════════════════════════════════════
+
+SECTION
+───────────────────────────────────────────────────
+Content here...
+
+═══════════════════════════════════════════════════
 ```
 
-After success, offer to run linting or tests next.
+
+## Workflow
+
+1. Show what will be done
+2. Ask for confirmation
+3. Execute only after approval
+
+
+## Pre-action Checks
+
+Before proceeding, verify:
+- [ ] TypeScript compiles (`npx tsc --noEmit`)
+- [ ] No type errors introduced
+

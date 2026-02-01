@@ -1,6 +1,6 @@
 ---
-description: Smart conventional commits with context
-darwin_version: 1.0.0
+description: Smart conventional commits with context. Use when user asks to commit changes, save work, create a git commit, push code, or wants help writing a commit message with proper conventional format.
+darwin_version: 1.1.0
 darwin_modules:
   input: v3
   research: v3

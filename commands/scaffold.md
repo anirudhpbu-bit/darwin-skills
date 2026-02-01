@@ -1,6 +1,6 @@
 ---
-description: Generate boilerplate matching project patterns
-darwin_version: 1.0.2
+description: Generate boilerplate matching project patterns. Use when user asks to create a new component, screen, hook, service, or file structure. Triggers on "create", "scaffold", "generate", "new component", "add a screen".
+darwin_version: 1.1.0
 darwin_modules:
   input: v1
   research: v3
