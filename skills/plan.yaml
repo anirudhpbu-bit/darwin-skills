@@ -1,6 +1,8 @@
 name: plan
-version: 1.0.0
-description: Generate structured implementation plans
+version: 1.1.0
+description: Generate structured implementation plans. Use when user asks to plan
+  a feature, design an approach, architect a solution, create a roadmap, or needs
+  step-by-step implementation strategy before coding.
 modules:
   input: v1
   research: v2
@@ -8,6 +10,18 @@ modules:
   output: v1
   workflow: v1
   validation: v3
+anti_patterns:
+- Don't start coding - this skill is for PLANNING only
+- Don't use vague placeholders like [DESCRIPTION] - be specific or ask
+- Don't skip the file analysis - always identify which files need changes
+- Don't ignore existing patterns - read CLAUDE.md and match conventions
+- Don't create overly complex plans - simpler is better
+examples:
+- trigger: plan the authentication feature
+- trigger: how should I implement dark mode
+- trigger: design the API structure
+- trigger: what's the approach for adding search
+- trigger: architect the notification system
 core_prompt: "# Implementation Plan Generator\n\nGenerate a detailed implementation\
   \ plan for the given feature or task.\n\n## Analysis Steps\n\n1. **Understand the\
   \ Request**\n   - What is being asked?\n   - What is the expected outcome?\n   -\
@@ -37,4 +51,4 @@ core_prompt: "# Implementation Plan Generator\n\nGenerate a detailed implementat
   ```\n\n## Guidelines\n\n1. Be specific about file paths and changes\n2. Consider\
   \ edge cases and error handling\n3. Keep scope focused - avoid feature creep\n"
 fitness_history: []
-last_compiled: '2026-02-01T13:36:26Z'
+last_compiled: '2026-02-01T19:20:54Z'

@@ -1,6 +1,8 @@
 name: commit
-version: 1.0.0
-description: Smart conventional commits with context
+version: 1.1.0
+description: Smart conventional commits with context. Use when user asks to commit
+  changes, save work, create a git commit, push code, or wants help writing a commit
+  message with proper conventional format.
 modules:
   input: v3
   research: v3
@@ -8,6 +10,18 @@ modules:
   output: v2
   workflow: v2
   validation: v2
+anti_patterns:
+- Don't commit without checking git status first
+- Don't use generic messages like 'update code' or 'fix bug'
+- Don't combine unrelated changes in one commit
+- Don't skip the scope when it's clear which component changed
+- Don't use past tense - use imperative mood (add, fix, not added, fixed)
+examples:
+- trigger: commit this
+- trigger: save my changes
+- trigger: create a commit
+- trigger: what should the commit message be
+- trigger: commit with a good message
 core_prompt: '# Smart Commit
 
 
@@ -113,4 +127,4 @@ core_prompt: '# Smart Commit
 
   '
 fitness_history: []
-last_compiled: '2026-02-01T13:36:26Z'
+last_compiled: '2026-02-01T19:20:54Z'

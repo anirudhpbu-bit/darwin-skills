@@ -1,6 +1,8 @@
 name: scaffold
-version: 1.0.2
-description: Generate boilerplate matching project patterns
+version: 1.1.0
+description: Generate boilerplate matching project patterns. Use when user asks to
+  create a new component, screen, hook, service, or file structure. Triggers on "create",
+  "scaffold", "generate", "new component", "add a screen".
 modules:
   input: v1
   research: v3
@@ -8,6 +10,19 @@ modules:
   output: v3
   workflow: v3
   validation: v3
+anti_patterns:
+- Don't generate generic boilerplate - match the project's actual patterns
+- Don't skip analyzing existing files first
+- Don't create files in the wrong location
+- Don't forget to update barrel exports (index.ts)
+- Don't use different naming conventions than the project uses
+examples:
+- trigger: scaffold a new screen
+- trigger: create ProfileComponent
+- trigger: generate a hook called useAuth
+- trigger: new service for API calls
+- trigger: add a Settings screen
+- trigger: create component Avatar
 core_prompt: '# Scaffold Generator
 
 
@@ -60,4 +75,4 @@ fitness_history:
   mutation: "input: v1 \u2192 v2"
 - timestamp: '2026-02-01T13:41:03Z'
   mutation: "input: v2 \u2192 v1"
-last_compiled: '2026-02-01T13:41:03Z'
+last_compiled: '2026-02-01T19:20:54Z'

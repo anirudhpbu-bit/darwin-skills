@@ -1,6 +1,8 @@
 name: darwin
-version: 1.0.0
-description: Skill evolution system - analyze, evaluate, and evolve skills
+version: 1.1.0
+description: Skill evolution system - analyze, evaluate, and evolve skills. Use when
+  user asks about skill fitness, wants to see skill stats, run evolution, check telemetry,
+  or asks "how are my skills doing" or "evolve skills".
 modules:
   input: v2
   research: v3
@@ -8,47 +10,95 @@ modules:
   output: v1
   workflow: v3
   validation: v3
-core_prompt: |
-  # Darwin - Skill Evolution System
+anti_patterns:
+- Don't show raw JSON - format data nicely
+- Don't run evolution without showing what will change first
+- Don't ignore missing telemetry - explain how to start collecting
+- Don't make mutations without backing up first
+- Don't report on skills that don't exist
+examples:
+- trigger: darwin status
+- trigger: how are my skills performing
+- trigger: evolve skills
+- trigger: check skill fitness
+- trigger: show telemetry
+- trigger: which skills need improvement
+core_prompt: '# Darwin - Skill Evolution System
+
 
   Darwin monitors, evaluates, and evolves your Claude Code skills over time.
 
+
   ## Commands
+
 
   **Usage:** `/darwin [command]`
 
+
   | Command | Description |
+
   |---------|-------------|
+
   | `status` | Dashboard with fitness scores for all skills (default) |
+
   | `evaluate [skill]` | Deep analysis of a specific skill |
+
   | `evolve` | Run evolution cycle (suggest + apply mutations) |
+
   | `suggest` | Show mutation suggestions without applying |
+
   | `telemetry` | View raw recent telemetry events |
+
   | `compile [skill]` | Recompile skill from modules |
+
 
   ## Evolution Commands
 
+
   ### Command: `evolve`
+
   Run the evolution engine to improve underperforming skills.
+
   ```bash
+
   python3 ~/.claude/darwin/bin/evolve.py cycle
+
   ```
+
 
   ### Command: `suggest`
+
   Show what mutations would be applied without changing anything.
+
   ```bash
+
   python3 ~/.claude/darwin/bin/evolve.py suggest
+
   ```
 
+
   ### Command: `compile [skill]`
+
   Recompile a skill from its module definition.
+
   ```bash
+
   python3 ~/.claude/darwin/bin/compile.py [skill]
+
   ```
+
 
   ## No Data Handling
 
+
   If telemetry files are empty or missing, explain how to start collecting data:
-  1. Start a NEW Claude session (hooks don't apply to current session)
+
+  1. Start a NEW Claude session (hooks don''t apply to current session)
+
   2. Use some skills: /plan, /commit, /techdebt
+
   3. Run /darwin status again
+
+  '
+fitness_history: []
+last_compiled: '2026-02-01T19:20:54Z'

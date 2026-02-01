@@ -1,6 +1,8 @@
 name: review-plan
-version: 1.0.0
-description: Review implementation plans with staff-engineer perspective
+version: 1.1.0
+description: Review implementation plans with staff-engineer perspective. Use when
+  user asks to review a plan, critique an approach, get feedback on architecture,
+  or asks "what do you think of this plan" or "is this approach solid".
 modules:
   input: v1
   research: v2
@@ -8,43 +10,86 @@ modules:
   output: v2
   workflow: v1
   validation: v2
-core_prompt: |
-  # Plan Review (Staff Engineer Perspective)
+anti_patterns:
+- Don't just approve everything - find real issues
+- Don't be negative without offering alternatives
+- Don't ignore the user's constraints and context
+- Don't nitpick minor details when there are bigger problems
+- Don't review without understanding the full plan first
+examples:
+- trigger: review this plan
+- trigger: what do you think of this approach
+- trigger: critique my architecture
+- trigger: is this plan solid
+- trigger: feedback on implementation
+- trigger: will this work
+core_prompt: '# Plan Review (Staff Engineer Perspective)
+
 
   Review the provided implementation plan as a senior/staff engineer would.
 
+
   ## Input
+
 
   **Plan to Review:** $ARGUMENTS
 
+
   If no plan provided, ask user to paste the plan or reference a file.
+
 
   ## Review Checklist
 
+
   ### 1. Completeness
+
   - Are all requirements addressed?
+
   - Are edge cases considered?
+
   - Is error handling planned?
 
+
   ### 2. Feasibility
+
   - Is the scope realistic?
+
   - Are there hidden complexities?
+
   - Do the proposed changes fit existing patterns?
 
+
   ### 3. Architecture
+
   - Does it follow project conventions?
+
   - Is the separation of concerns correct?
+
   - Will this be maintainable?
 
+
   ### 4. Risk Assessment
+
   - What could go wrong?
-  - What's the blast radius if it fails?
+
+  - What''s the blast radius if it fails?
+
   - Performance implications?
+
 
   ## Review Mindset
 
+
   Think like a staff engineer:
+
   - "What will break?"
-  - "What's the simplest solution?"
+
+  - "What''s the simplest solution?"
+
   - "Will we regret this in 6 months?"
+
   - "Is this solving the right problem?"
+
+  '
+fitness_history: []
+last_compiled: '2026-02-01T19:20:54Z'
