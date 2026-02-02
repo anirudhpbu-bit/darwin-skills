@@ -1,6 +1,6 @@
 ---
-description: Skill evolution system - analyze, evaluate, and evolve skills. Use when user asks about skill fitness, wants to see skill stats, run evolution, check telemetry, or asks "how are my skills doing" or "evolve skills".
-darwin_version: 1.1.0
+description: Skill evolution system - analyze, evaluate, evolve, and discover skills. Use when user asks about skill fitness, wants to see skill stats, run evolution, check telemetry, discover new skills, or asks "how are my skills doing" or "evolve skills" or "find new skills".
+darwin_version: 1.2.0
 darwin_modules:
   input: v2
   research: v3
@@ -10,9 +10,9 @@ darwin_modules:
   validation: v3
 ---
 
-# Darwin - Skill Evolution System
+# Darwin - Skill Evolution & Discovery System
 
-Darwin monitors, evaluates, and evolves your Claude Code skills over time.
+Darwin monitors, evaluates, evolves, and discovers skills for Claude Code.
 
 ## Commands
 
@@ -26,6 +26,40 @@ Darwin monitors, evaluates, and evolves your Claude Code skills over time.
 | `suggest` | Show mutation suggestions without applying |
 | `telemetry` | View raw recent telemetry events |
 | `compile [skill]` | Recompile skill from modules |
+| `discover` | **NEW** Fetch and show trending skills from skills.sh |
+| `install [skill]` | **NEW** Install external skill and add to tracking |
+
+---
+
+## Discovery Commands (NEW)
+
+### Command: `discover`
+Fetch trending skills from skills.sh and show recommendations based on your usage.
+```bash
+python3 ~/.claude/darwin/bin/discover.py fetch
+```
+
+Output shows:
+- Top recommended skills based on your usage patterns
+- Install counts from the community
+- One-line install commands
+
+### Command: `install [skill-name]`
+Install an external skill and add it to Darwin tracking.
+```bash
+~/.claude/darwin/bin/install-skill.sh <skill-name-or-repo>
+```
+
+Examples:
+- `/darwin install vercel-react-best-practices`
+- `/darwin install frontend-design`
+
+This will:
+1. Install via `npx skills add`
+2. Create Darwin YAML wrapper for tracking
+3. Add to evolution system
+
+---
 
 ## Evolution Commands
 
@@ -46,6 +80,8 @@ Recompile a skill from its module definition.
 ```bash
 python3 ~/.claude/darwin/bin/compile.py [skill]
 ```
+
+---
 
 ## No Data Handling
 

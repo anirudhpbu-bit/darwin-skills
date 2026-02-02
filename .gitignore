@@ -1,0 +1,24 @@
+# Local telemetry data (personal usage stats)
+telemetry/
+
+# Runtime directories
+changelogs/
+dist/
+
+# Local logs
+logs/*.log
+
+# Local evaluations (contains personal metrics)
+evaluations/*.json
+
+# Discovery cache
+discovery/*.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~

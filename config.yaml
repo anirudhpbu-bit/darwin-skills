@@ -1,0 +1,42 @@
+# Darwin Skills Evolution System
+# Configuration
+
+version: "0.1.0"
+
+# Fitness function weights
+fitness:
+  weights:
+    efficiency: 0.30      # Useful output per token
+    acceptance: 0.25      # User accepted output
+    decisiveness: 0.20    # Actions vs questions
+    completion: 0.15      # Finished without interruption
+    adoption: 0.10        # Usage trend
+
+  thresholds:
+    top_performer: 0.80
+    healthy: 0.60
+    underperforming: 0.40
+    failing: 0.40
+
+# Evolution settings
+evolution:
+  cycle_days: 7           # Days between evolution cycles
+  max_mutations: 3        # Max mutations per cycle
+  min_invocations: 5      # Min data points before evaluation
+  grace_period_days: 14   # New skills exempt from pruning
+
+# Telemetry
+telemetry:
+  retention_days: 90
+  aggregate_interval: "daily"
+
+# Skills to track
+tracked_skills:
+  - plan
+  - review-plan
+  - techdebt
+  - commit
+  - scaffold
+  - build-fix
+  - rams
+  - darwin

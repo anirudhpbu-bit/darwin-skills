@@ -1,8 +1,9 @@
 name: darwin
-version: 1.1.0
-description: Skill evolution system - analyze, evaluate, and evolve skills. Use when
-  user asks about skill fitness, wants to see skill stats, run evolution, check telemetry,
-  or asks "how are my skills doing" or "evolve skills".
+version: 1.2.0
+description: Skill evolution system - analyze, evaluate, evolve, and discover skills.
+  Use when user asks about skill fitness, wants to see skill stats, run evolution,
+  check telemetry, discover new skills, or asks "how are my skills doing" or "evolve
+  skills" or "find new skills".
 modules:
   input: v2
   research: v3
@@ -16,6 +17,7 @@ anti_patterns:
 - Don't ignore missing telemetry - explain how to start collecting
 - Don't make mutations without backing up first
 - Don't report on skills that don't exist
+- Don't install skills without user confirmation
 examples:
 - trigger: darwin status
 - trigger: how are my skills performing
@@ -23,10 +25,13 @@ examples:
 - trigger: check skill fitness
 - trigger: show telemetry
 - trigger: which skills need improvement
-core_prompt: '# Darwin - Skill Evolution System
+- trigger: discover new skills
+- trigger: find trending skills
+- trigger: install a skill
+core_prompt: '# Darwin - Skill Evolution & Discovery System
 
 
-  Darwin monitors, evaluates, and evolves your Claude Code skills over time.
+  Darwin monitors, evaluates, evolves, and discovers skills for Claude Code.
 
 
   ## Commands
@@ -50,6 +55,66 @@ core_prompt: '# Darwin - Skill Evolution System
   | `telemetry` | View raw recent telemetry events |
 
   | `compile [skill]` | Recompile skill from modules |
+
+  | `discover` | **NEW** Fetch and show trending skills from skills.sh |
+
+  | `install [skill]` | **NEW** Install external skill and add to tracking |
+
+
+  ---
+
+
+  ## Discovery Commands (NEW)
+
+
+  ### Command: `discover`
+
+  Fetch trending skills from skills.sh and show recommendations based on your usage.
+
+  ```bash
+
+  python3 ~/.claude/darwin/bin/discover.py fetch
+
+  ```
+
+
+  Output shows:
+
+  - Top recommended skills based on your usage patterns
+
+  - Install counts from the community
+
+  - One-line install commands
+
+
+  ### Command: `install [skill-name]`
+
+  Install an external skill and add it to Darwin tracking.
+
+  ```bash
+
+  ~/.claude/darwin/bin/install-skill.sh <skill-name-or-repo>
+
+  ```
+
+
+  Examples:
+
+  - `/darwin install vercel-react-best-practices`
+
+  - `/darwin install frontend-design`
+
+
+  This will:
+
+  1. Install via `npx skills add`
+
+  2. Create Darwin YAML wrapper for tracking
+
+  3. Add to evolution system
+
+
+  ---
 
 
   ## Evolution Commands
@@ -88,6 +153,9 @@ core_prompt: '# Darwin - Skill Evolution System
   ```
 
 
+  ---
+
+
   ## No Data Handling
 
 
@@ -101,4 +169,4 @@ core_prompt: '# Darwin - Skill Evolution System
 
   '
 fitness_history: []
-last_compiled: '2026-02-01T19:20:54Z'
+last_compiled: '2026-02-01T19:28:11Z'
