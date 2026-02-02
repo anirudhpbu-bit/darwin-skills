@@ -123,15 +123,22 @@ HOOKS_JSON=$(cat <<'HOOKS_EOF'
 HOOKS_EOF
 )
 
+HOOKS_TMP=$(mktemp)
+echo "$HOOKS_JSON" > "$HOOKS_TMP"
+
 if [ -f "$SETTINGS_FILE" ]; then
     # Merge with existing settings
-    python3 << PYTHON_EOF
-import json
+    python3 - "$SETTINGS_FILE" "$HOOKS_TMP" << 'PYTHON_EOF'
+import json, sys
 
-with open("$SETTINGS_FILE", "r") as f:
+settings_file = sys.argv[1]
+hooks_file = sys.argv[2]
+
+with open(settings_file, "r") as f:
     settings = json.load(f)
 
-new_hooks = json.loads('''$HOOKS_JSON''')
+with open(hooks_file, "r") as f:
+    new_hooks = json.load(f)
 
 if "hooks" not in settings:
     settings["hooks"] = {}
@@ -145,7 +152,7 @@ for hook_name, hook_list in new_hooks["hooks"].items():
         if hook["command"] not in existing_commands:
             settings["hooks"][hook_name].append(hook)
 
-with open("$SETTINGS_FILE", "w") as f:
+with open(settings_file, "w") as f:
     json.dump(settings, f, indent=2)
 
 print("  Merged hooks into existing settings.json")
@@ -154,6 +161,8 @@ else
     echo "$HOOKS_JSON" > "$SETTINGS_FILE"
     echo "  Created new settings.json"
 fi
+
+rm -f "$HOOKS_TMP"
 
 # Compile skills
 echo "Compiling skills..."
