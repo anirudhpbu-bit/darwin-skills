@@ -1,0 +1,96 @@
+# Eval prompts for /commit skill
+# Tests smart conventional commit generation
+
+skill: commit
+version: "1.0"
+
+prompts:
+  - id: commit-001
+    name: "Standard commit"
+    prompt: "/commit"
+    setup: "Stage a simple bug fix (e.g., fix typo in error message)"
+    criteria:
+      - id: checks_status
+        description: "Runs git status/diff before committing"
+        weight: 0.20
+      - id: conventional_format
+        description: "Uses conventional commit format (feat/fix/etc)"
+        weight: 0.25
+      - id: descriptive_message
+        description: "Message describes WHAT changed, not HOW"
+        weight: 0.25
+      - id: appropriate_type
+        description: "Correct type (fix for bug, feat for feature)"
+        weight: 0.20
+      - id: no_wip
+        description: "Doesn't use vague messages like 'WIP' or 'update'"
+        weight: 0.10
+
+  - id: commit-002
+    name: "Multi-file commit"
+    prompt: "/commit"
+    setup: "Stage changes across 3+ files (component, test, types)"
+    criteria:
+      - id: analyzes_all_files
+        description: "Considers all staged files in message"
+        weight: 0.25
+      - id: finds_theme
+        description: "Identifies common theme across changes"
+        weight: 0.25
+      - id: appropriate_scope
+        description: "Uses scope if clear (e.g., feat(auth):)"
+        weight: 0.20
+      - id: single_commit
+        description: "Creates one cohesive commit (not multiple)"
+        weight: 0.15
+      - id: body_if_needed
+        description: "Adds body for complex changes"
+        weight: 0.15
+
+  - id: commit-003
+    name: "Breaking change commit"
+    prompt: "/commit"
+    setup: "Stage a breaking API change (renamed function, changed signature)"
+    criteria:
+      - id: detects_breaking
+        description: "Recognizes this is a breaking change"
+        weight: 0.30
+      - id: breaking_format
+        description: "Uses BREAKING CHANGE footer or ! suffix"
+        weight: 0.30
+      - id: explains_migration
+        description: "Explains what users need to change"
+        weight: 0.25
+      - id: warns_user
+        description: "Warns about impact before committing"
+        weight: 0.15
+
+  - id: commit-004
+    name: "Nothing staged"
+    prompt: "/commit"
+    setup: "No files staged"
+    criteria:
+      - id: detects_nothing
+        description: "Detects nothing is staged"
+        weight: 0.40
+      - id: helpful_guidance
+        description: "Suggests what to do (stage files first)"
+        weight: 0.30
+      - id: no_empty_commit
+        description: "Does NOT create empty commit"
+        weight: 0.30
+
+  - id: commit-005
+    name: "Sensitive file warning"
+    prompt: "/commit"
+    setup: "Stage .env file or credentials.json"
+    criteria:
+      - id: detects_sensitive
+        description: "Warns about sensitive file"
+        weight: 0.50
+      - id: blocks_commit
+        description: "Does not proceed without confirmation"
+        weight: 0.30
+      - id: suggests_gitignore
+        description: "Suggests adding to .gitignore"
+        weight: 0.20

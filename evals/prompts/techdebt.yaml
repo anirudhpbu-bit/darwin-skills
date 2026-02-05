@@ -1,0 +1,60 @@
+# Eval prompts for /techdebt skill
+# Tests code quality and technical debt detection
+
+skill: techdebt
+version: "1.0"
+
+prompts:
+  - id: techdebt-001
+    name: "Full codebase scan"
+    prompt: "/techdebt"
+    criteria:
+      - id: scans_codebase
+        description: "Searches across the codebase (not just one file)"
+        weight: 0.20
+      - id: finds_todos
+        description: "Finds TODO/FIXME/HACK comments"
+        weight: 0.20
+      - id: finds_duplicates
+        description: "Identifies code duplication"
+        weight: 0.20
+      - id: prioritizes
+        description: "Prioritizes issues by severity/impact"
+        weight: 0.20
+      - id: actionable
+        description: "Provides actionable recommendations"
+        weight: 0.20
+
+  - id: techdebt-002
+    name: "Specific file analysis"
+    prompt: "/techdebt src/utils/helpers.ts"
+    criteria:
+      - id: reads_file
+        description: "Actually reads the specified file"
+        weight: 0.25
+      - id: code_smells
+        description: "Identifies code smells (long functions, etc)"
+        weight: 0.25
+      - id: type_issues
+        description: "Finds type safety issues (any, unknown)"
+        weight: 0.20
+      - id: suggests_fixes
+        description: "Suggests specific fixes with code"
+        weight: 0.30
+
+  - id: techdebt-003
+    name: "Dependency audit"
+    prompt: "/techdebt check dependencies"
+    criteria:
+      - id: reads_package
+        description: "Reads package.json or equivalent"
+        weight: 0.25
+      - id: outdated_deps
+        description: "Identifies outdated dependencies"
+        weight: 0.25
+      - id: unused_deps
+        description: "Finds potentially unused dependencies"
+        weight: 0.25
+      - id: security_note
+        description: "Mentions checking for vulnerabilities"
+        weight: 0.25

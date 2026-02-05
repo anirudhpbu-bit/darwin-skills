@@ -1,0 +1,97 @@
+# Eval prompts for /plan skill
+# Tests implementation planning capabilities
+
+skill: plan
+version: "1.0"
+
+prompts:
+  - id: plan-001
+    name: "Simple feature planning"
+    prompt: "/plan add a dark mode toggle to the settings page"
+    criteria:
+      - id: identifies_files
+        description: "Identifies specific files that need changes"
+        weight: 0.25
+      - id: step_breakdown
+        description: "Breaks down into clear, actionable steps"
+        weight: 0.25
+      - id: considers_patterns
+        description: "References existing code patterns or conventions"
+        weight: 0.20
+      - id: no_code_writing
+        description: "Does NOT write actual code (planning only)"
+        weight: 0.15
+      - id: asks_clarifications
+        description: "Asks clarifying questions if needed"
+        weight: 0.15
+
+  - id: plan-002
+    name: "Complex architectural planning"
+    prompt: "/plan implement user authentication with OAuth"
+    criteria:
+      - id: identifies_components
+        description: "Identifies all components (frontend, backend, DB)"
+        weight: 0.25
+      - id: security_considerations
+        description: "Mentions security considerations"
+        weight: 0.20
+      - id: dependency_analysis
+        description: "Identifies dependencies or packages needed"
+        weight: 0.20
+      - id: phased_approach
+        description: "Suggests phased implementation approach"
+        weight: 0.20
+      - id: testability
+        description: "Considers testing strategy"
+        weight: 0.15
+
+  - id: plan-003
+    name: "Refactoring planning"
+    prompt: "/plan refactor the API handlers to use a service layer"
+    criteria:
+      - id: current_state
+        description: "Analyzes current code structure first"
+        weight: 0.25
+      - id: migration_path
+        description: "Provides migration path (not big bang)"
+        weight: 0.25
+      - id: backwards_compat
+        description: "Considers backwards compatibility"
+        weight: 0.20
+      - id: risk_assessment
+        description: "Identifies potential risks or gotchas"
+        weight: 0.15
+      - id: verification
+        description: "Suggests how to verify refactor worked"
+        weight: 0.15
+
+  - id: plan-004
+    name: "Bug investigation planning"
+    prompt: "/plan investigate why login fails intermittently"
+    criteria:
+      - id: diagnostic_steps
+        description: "Suggests diagnostic/debugging steps"
+        weight: 0.30
+      - id: hypothesis
+        description: "Forms hypotheses about possible causes"
+        weight: 0.25
+      - id: log_analysis
+        description: "Suggests checking logs or metrics"
+        weight: 0.20
+      - id: reproduction
+        description: "Considers how to reproduce the issue"
+        weight: 0.25
+
+  - id: plan-005
+    name: "Minimal context planning"
+    prompt: "/plan add sorting"
+    criteria:
+      - id: asks_questions
+        description: "Asks what needs sorting (doesn't assume)"
+        weight: 0.40
+      - id: no_hallucination
+        description: "Doesn't make up file names or structures"
+        weight: 0.35
+      - id: explores_first
+        description: "Suggests exploring codebase first"
+        weight: 0.25

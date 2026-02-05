@@ -1,0 +1,78 @@
+# Eval prompts for /build-fix skill
+# Tests build error loop fixing
+
+skill: build-fix
+version: "1.0"
+
+prompts:
+  - id: build-fix-001
+    name: "Type errors"
+    prompt: "/build-fix"
+    setup: "Introduce 3 TypeScript type errors"
+    criteria:
+      - id: runs_build
+        description: "Runs build/type-check command first"
+        weight: 0.20
+      - id: parses_errors
+        description: "Correctly parses error output"
+        weight: 0.20
+      - id: fixes_errors
+        description: "Fixes errors (not just suppresses)"
+        weight: 0.25
+      - id: loops_until_clean
+        description: "Re-runs build after fixes to verify"
+        weight: 0.20
+      - id: reports_success
+        description: "Reports when build passes"
+        weight: 0.15
+
+  - id: build-fix-002
+    name: "Import errors"
+    prompt: "/build-fix"
+    setup: "Break an import (wrong path or missing module)"
+    criteria:
+      - id: identifies_import
+        description: "Identifies import as the issue"
+        weight: 0.25
+      - id: finds_correct_path
+        description: "Finds correct import path"
+        weight: 0.30
+      - id: doesnt_delete
+        description: "Doesn't just delete the import"
+        weight: 0.25
+      - id: verifies_fix
+        description: "Verifies fix with rebuild"
+        weight: 0.20
+
+  - id: build-fix-003
+    name: "Multiple error types"
+    prompt: "/build-fix"
+    setup: "Mix of type errors, missing imports, syntax errors"
+    criteria:
+      - id: handles_all
+        description: "Addresses all error types"
+        weight: 0.30
+      - id: prioritizes
+        description: "Fixes in sensible order (syntax first)"
+        weight: 0.25
+      - id: iterates
+        description: "Iterates until all fixed"
+        weight: 0.25
+      - id: no_regressions
+        description: "Doesn't introduce new errors"
+        weight: 0.20
+
+  - id: build-fix-004
+    name: "Clean build"
+    prompt: "/build-fix"
+    setup: "No errors in codebase"
+    criteria:
+      - id: runs_check
+        description: "Still runs build to verify"
+        weight: 0.40
+      - id: reports_clean
+        description: "Reports build is already clean"
+        weight: 0.40
+      - id: no_changes
+        description: "Makes no unnecessary changes"
+        weight: 0.20

@@ -1,0 +1,66 @@
+# Eval prompts for /review-plan skill
+# Tests staff-engineer level plan review
+
+skill: review-plan
+version: "1.0"
+
+prompts:
+  - id: review-plan-001
+    name: "Review good plan"
+    prompt: "/review-plan"
+    setup: "Provide a well-structured implementation plan"
+    criteria:
+      - id: acknowledges_good
+        description: "Acknowledges what's good about the plan"
+        weight: 0.20
+      - id: finds_gaps
+        description: "Still identifies potential gaps or risks"
+        weight: 0.25
+      - id: suggests_improvements
+        description: "Suggests concrete improvements"
+        weight: 0.25
+      - id: not_nitpicky
+        description: "Focuses on important issues, not nitpicks"
+        weight: 0.15
+      - id: actionable
+        description: "Feedback is actionable"
+        weight: 0.15
+
+  - id: review-plan-002
+    name: "Review flawed plan"
+    prompt: "/review-plan"
+    setup: "Provide plan with obvious gaps (no error handling, no tests)"
+    criteria:
+      - id: identifies_gaps
+        description: "Identifies the missing pieces"
+        weight: 0.30
+      - id: explains_why
+        description: "Explains WHY these matter"
+        weight: 0.25
+      - id: prioritizes_feedback
+        description: "Prioritizes most critical issues"
+        weight: 0.20
+      - id: constructive
+        description: "Tone is constructive, not dismissive"
+        weight: 0.15
+      - id: offers_alternatives
+        description: "Offers alternative approaches"
+        weight: 0.10
+
+  - id: review-plan-003
+    name: "Review over-engineered plan"
+    prompt: "/review-plan"
+    setup: "Provide overly complex plan for simple task"
+    criteria:
+      - id: spots_complexity
+        description: "Identifies unnecessary complexity"
+        weight: 0.35
+      - id: suggests_simpler
+        description: "Suggests simpler alternatives"
+        weight: 0.30
+      - id: yagni_principle
+        description: "References YAGNI or similar principles"
+        weight: 0.20
+      - id: preserves_intent
+        description: "Preserves original intent in suggestions"
+        weight: 0.15

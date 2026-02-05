@@ -1,0 +1,79 @@
+# Eval prompts for /design-audit skill
+# Tests accessibility and visual design review
+
+skill: design-audit
+version: "1.0"
+
+prompts:
+  - id: design-audit-001
+    name: "Component with a11y issues"
+    prompt: "/design-audit src/components/IconButton.tsx"
+    setup: "Component with icon-only button, no aria-label"
+    criteria:
+      - id: reads_file
+        description: "Actually reads the specified file"
+        weight: 0.15
+      - id: finds_a11y_issue
+        description: "Identifies missing aria-label"
+        weight: 0.30
+      - id: explains_impact
+        description: "Explains impact on screen readers"
+        weight: 0.20
+      - id: provides_fix
+        description: "Provides specific fix with code"
+        weight: 0.25
+      - id: wcag_reference
+        description: "References WCAG criteria"
+        weight: 0.10
+
+  - id: design-audit-002
+    name: "Form accessibility"
+    prompt: "/design-audit src/components/LoginForm.tsx"
+    setup: "Form with inputs but no labels"
+    criteria:
+      - id: finds_label_issue
+        description: "Identifies missing labels"
+        weight: 0.25
+      - id: keyboard_check
+        description: "Checks keyboard navigation"
+        weight: 0.20
+      - id: error_handling
+        description: "Checks error message accessibility"
+        weight: 0.20
+      - id: focus_management
+        description: "Considers focus management"
+        weight: 0.20
+      - id: provides_fixes
+        description: "Provides fixes for each issue"
+        weight: 0.15
+
+  - id: design-audit-003
+    name: "Color contrast check"
+    prompt: "/design-audit check contrast in Button.tsx"
+    criteria:
+      - id: identifies_colors
+        description: "Identifies color values used"
+        weight: 0.25
+      - id: contrast_ratio
+        description: "Mentions contrast ratio requirements"
+        weight: 0.25
+      - id: checks_states
+        description: "Checks all states (hover, focus, disabled)"
+        weight: 0.25
+      - id: suggests_alternatives
+        description: "Suggests accessible color alternatives"
+        weight: 0.25
+
+  - id: design-audit-004
+    name: "No file specified"
+    prompt: "/design-audit"
+    criteria:
+      - id: asks_which_file
+        description: "Asks which file(s) to review"
+        weight: 0.40
+      - id: suggests_scope
+        description: "Suggests starting points (components dir, etc)"
+        weight: 0.30
+      - id: no_hallucination
+        description: "Doesn't make up files to review"
+        weight: 0.30

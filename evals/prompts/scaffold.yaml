@@ -1,0 +1,74 @@
+# Eval prompts for /scaffold skill
+# Tests boilerplate generation matching project patterns
+
+skill: scaffold
+version: "1.0"
+
+prompts:
+  - id: scaffold-001
+    name: "New component"
+    prompt: "/scaffold create Button component"
+    criteria:
+      - id: analyzes_existing
+        description: "Looks at existing components first"
+        weight: 0.25
+      - id: matches_patterns
+        description: "Matches existing file structure/naming"
+        weight: 0.25
+      - id: correct_location
+        description: "Creates in correct directory"
+        weight: 0.20
+      - id: includes_types
+        description: "Includes TypeScript types if project uses TS"
+        weight: 0.15
+      - id: exports_properly
+        description: "Updates barrel exports (index.ts) if used"
+        weight: 0.15
+
+  - id: scaffold-002
+    name: "New hook"
+    prompt: "/scaffold generate useLocalStorage hook"
+    criteria:
+      - id: hook_conventions
+        description: "Follows React hooks conventions (use prefix)"
+        weight: 0.25
+      - id: matches_existing
+        description: "Matches existing hook patterns in project"
+        weight: 0.25
+      - id: typed_return
+        description: "Properly types return value"
+        weight: 0.25
+      - id: generic_if_needed
+        description: "Uses generics if appropriate"
+        weight: 0.25
+
+  - id: scaffold-003
+    name: "New screen/page"
+    prompt: "/scaffold add Settings screen"
+    criteria:
+      - id: routing_aware
+        description: "Considers routing setup"
+        weight: 0.25
+      - id: layout_match
+        description: "Matches existing screen/page layout"
+        weight: 0.25
+      - id: navigation_update
+        description: "Mentions updating navigation if needed"
+        weight: 0.25
+      - id: complete_structure
+        description: "Creates complete structure (styles, tests, etc)"
+        weight: 0.25
+
+  - id: scaffold-004
+    name: "Ambiguous request"
+    prompt: "/scaffold create Profile"
+    criteria:
+      - id: asks_clarification
+        description: "Asks what type (component, screen, service?)"
+        weight: 0.40
+      - id: shows_options
+        description: "Shows available scaffold types"
+        weight: 0.30
+      - id: no_assumption
+        description: "Doesn't assume and create wrong thing"
+        weight: 0.30
