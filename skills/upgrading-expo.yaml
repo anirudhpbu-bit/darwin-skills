@@ -1,0 +1,14 @@
+name: upgrading-expo
+version: 1.0.0
+description: 'External skill from skills.sh: upgrading-expo'
+source: skills.sh
+external: true
+modules:
+  input: v2
+  research: v3
+  structure: v1
+  output: v1
+  workflow: v3
+  validation: v3
+installed_at: '2026-02-09T01:55:53Z'
+fitness_history: []
