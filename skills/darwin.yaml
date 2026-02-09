@@ -1,9 +1,9 @@
 name: darwin
-version: 1.3.1
+version: 2.0.0
 description: Monitors, evaluates, and evolves Claude Code skills using fitness metrics.
-  Analyzes skill performance, suggests mutations for underperformers, and tracks evolution
-  history. Triggers on "skill status", "fitness scores", "evolve skills", "discover
-  skills", "how are my skills doing", "check telemetry".
+  Recommends skills based on usage gaps, syncs with skills.sh, and learns optimal
+  module configurations. Triggers on "skill status", "recommend skills", "sync skills",
+  "evolve skills", "affinity matrix", "how are my skills doing".
 disable-model-invocation: true
 modules:
   input: v2
@@ -23,12 +23,12 @@ examples:
 - trigger: darwin status
 - trigger: how are my skills performing
 - trigger: evolve skills
-- trigger: check skill fitness
-- trigger: show telemetry
+- trigger: recommend skills for me
+- trigger: sync with skills.sh
+- trigger: show affinity matrix
 - trigger: which skills need improvement
-- trigger: discover new skills
 - trigger: find trending skills
-- trigger: install a skill
+- trigger: what skills am I missing
 core_prompt: '# Darwin - Skill Evolution & Discovery System
 
 
