@@ -1,6 +1,6 @@
 ---
-description: Monitors, evaluates, and evolves Claude Code skills using fitness metrics. Recommends skills based on usage gaps, syncs with skills.sh, and learns optimal module configurations. Triggers on "skill status", "fitness scores", "evolve skills", "recommend skills", "sync skills", "how are my skills doing".
-darwin_version: 2.0.0
+description: Monitors, evaluates, and evolves Claude Code skills using fitness metrics. Recommends skills, syncs with skills.sh, chains skills via pipelines, and learns optimal configurations. Triggers on "skill status", "evolve skills", "recommend", "sync", "pipeline", "how are my skills doing".
+darwin_version: 2.1.0
 darwin_modules:
   input: v2
   research: v3
@@ -25,6 +25,7 @@ Monitors, evaluates, evolves, and recommends Claude Code skills.
 | `suggest` | `evolve.py suggest` | Preview mutations |
 | `evolve` | `evolve.py cycle` | Full evolution cycle |
 | `affinity` | `affinity.py show` | Module-task performance |
+| `pipeline` | `pipeline.py` | Chain skills together |
 | `telemetry` | Read telemetry/*.json | View raw events |
 
 ## New in 2.0: Smart Recommendations
@@ -69,6 +70,21 @@ python3 ~/.claude/darwin/bin/affinity.py show
 
 Shows which module variants work best for different task types:
 - Planning, Debugging, Refactoring, Testing, etc.
+
+### pipeline
+Chain multiple skills for complex workflows.
+```bash
+python3 ~/.claude/darwin/bin/pipeline.py list
+python3 ~/.claude/darwin/bin/pipeline.py run full-review
+python3 ~/.claude/darwin/bin/pipeline.py run feature-complete "add dark mode"
+```
+
+Built-in pipelines:
+- `full-review`: techdebt → rams → review-plan
+- `feature-complete`: plan → scaffold → build-fix → commit
+- `quality-gate`: techdebt → build-fix → review-plan
+- `refactor-safe`: plan → build-fix → techdebt
+- `onboard-codebase`: techdebt → plan
 
 ## Evolution Commands
 
