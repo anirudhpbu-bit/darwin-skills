@@ -1,11 +1,11 @@
 name: design-audit
-version: 1.1.3
+version: 1.1.4
 description: Run accessibility and visual design review. Use when user asks to check
   accessibility, review UI/UX, audit for WCAG compliance, find a11y issues, or asks
   "is this accessible" or "review this component's design".
 modules:
   input: v1
-  research: v1
+  research: v2
   structure: v1
   output: v2
   workflow: v1
@@ -106,4 +106,6 @@ fitness_history:
   mutation: "input: v2 \u2192 v1"
 - timestamp: '2026-02-09T01:27:19Z'
   mutation: "research: v2 \u2192 v1"
-last_compiled: '2026-02-09T01:27:19Z'
+- timestamp: '2026-02-10T09:29:12Z'
+  mutation: "research: v1 \u2192 v2"
+last_compiled: '2026-02-10T09:29:12Z'

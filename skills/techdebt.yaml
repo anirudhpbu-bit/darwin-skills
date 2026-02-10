@@ -1,11 +1,11 @@
 name: techdebt
-version: 1.1.3
+version: 1.1.4
 description: Find code smells, duplicates, and TODOs. Use when user asks about technical
   debt, code quality, cleanup opportunities, wants to find issues, audit the codebase,
   or asks "what needs fixing" or "what's wrong with this code".
 modules:
   input: v2
-  research: v2
+  research: v1
   structure: v1
   output: v1
   workflow: v1
@@ -69,4 +69,6 @@ fitness_history:
   mutation: "input: v1 \u2192 v2"
 - timestamp: '2026-02-09T01:27:18Z'
   mutation: "research: v1 \u2192 v2"
-last_compiled: '2026-02-09T01:27:18Z'
+- timestamp: '2026-02-10T09:29:11Z'
+  mutation: "research: v2 \u2192 v1"
+last_compiled: '2026-02-10T09:29:11Z'

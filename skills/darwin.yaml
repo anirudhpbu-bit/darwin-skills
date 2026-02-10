@@ -1,5 +1,5 @@
 name: darwin
-version: 2.0.0
+version: 2.0.1
 description: Monitors, evaluates, and evolves Claude Code skills using fitness metrics.
   Recommends skills based on usage gaps, syncs with skills.sh, and learns optimal
   module configurations. Triggers on "skill status", "recommend skills", "sync skills",
@@ -7,7 +7,7 @@ description: Monitors, evaluates, and evolves Claude Code skills using fitness m
 disable-model-invocation: true
 modules:
   input: v2
-  research: v1
+  research: v2
   structure: v1
   output: v1
   workflow: v3
@@ -176,4 +176,6 @@ fitness_history:
   mutation: "input: v1 \u2192 v2"
 - timestamp: '2026-02-09T01:27:16Z'
   mutation: "research: v3 \u2192 v1"
-last_compiled: '2026-02-09T01:27:16Z'
+- timestamp: '2026-02-10T09:29:10Z'
+  mutation: "research: v1 \u2192 v2"
+last_compiled: '2026-02-10T09:29:10Z'
