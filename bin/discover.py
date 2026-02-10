@@ -260,7 +260,7 @@ def get_usage_categories():
                                 categories["testing"] = categories.get("testing", 0) + 1
                             if skill in ["commit"]:
                                 categories["devops"] = categories.get("devops", 0) + 1
-                            if skill in ["rams"]:
+                            if skill in ["design-audit"]:
                                 categories["design"] = categories.get("design", 0) + 1
                         except json.JSONDecodeError:
                             continue

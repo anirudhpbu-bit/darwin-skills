@@ -35,7 +35,7 @@ BUILTIN_PIPELINES = {
                 "pass_output": True
             },
             {
-                "skill": "rams",
+                "skill": "design-audit",
                 "name": "Accessibility Review",
                 "args": "",
                 "pass_output": True

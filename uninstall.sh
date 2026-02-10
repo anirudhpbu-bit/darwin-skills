@@ -35,7 +35,7 @@ fi
 
 # Remove Darwin commands
 echo "Removing skills..."
-SKILLS=(darwin plan commit review-plan techdebt scaffold build-fix rams)
+SKILLS=(darwin plan commit review-plan techdebt scaffold build-fix design-audit)
 for skill in "${SKILLS[@]}"; do
     rm -f "$COMMANDS_DIR/$skill.md"
 done

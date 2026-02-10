@@ -34,7 +34,7 @@ fi
 # Get all tracked skills from config
 TRACKED_SKILLS=$(cat "$DARWIN_DIR/config.yaml" 2>/dev/null | grep -A20 "tracked_skills:" | grep "^  - " | sed 's/^  - //' | tr '\n' ' ')
 if [ -z "$TRACKED_SKILLS" ]; then
-    TRACKED_SKILLS="plan review-plan techdebt commit scaffold build-fix rams darwin"
+    TRACKED_SKILLS="plan review-plan techdebt commit scaffold build-fix design-audit darwin"
 fi
 
 # Count total skill invocations this week

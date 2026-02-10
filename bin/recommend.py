@@ -49,7 +49,7 @@ PATTERNS = {
         "message": "No code audit in {count} days",
         "benefit": "Finds code smells, duplicates, and TODOs"
     },
-    "rams": {
+    "design-audit": {
         "detect": "ui_changes_without_a11y",
         "threshold": 5,
         "message": "{count} UI component changes without accessibility review",
@@ -267,8 +267,8 @@ def detect_gaps() -> List[Dict]:
 
         elif detection == "ui_changes_without_a11y":
             # Heuristic: check for component file changes
-            rams_usage = skill_usage.get("rams", 0)
-            if rams_usage == 0 and skill_name in installed:
+            design_audit_usage = skill_usage.get("design-audit", 0)
+            if design_audit_usage == 0 and skill_name in installed:
                 should_recommend = True
                 count = 5  # Estimate
 
